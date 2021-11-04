@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#setting PATH to SIP protected directories only
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin
+
 #variable for storing the current users name
 currentuser=`stat -f "%Su" /dev/console`
 
