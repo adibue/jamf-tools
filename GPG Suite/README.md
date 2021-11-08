@@ -24,8 +24,8 @@ When this has been done, it will look something like this:
 
 In the example of the screenshot, the policy will
 
-1 install the GPG Suite PKG
-2 run the serializer script AFTER the installation
-3 run an inventory update
+1. install the GPG Suite PKG
+2. run the serializer script AFTER the installation
+3. run an inventory update
 
 That's it ;-)
