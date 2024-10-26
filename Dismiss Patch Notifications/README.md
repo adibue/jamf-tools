@@ -7,8 +7,9 @@ deserved holidays or another leave of absence.
 Jamf Pro's Web UI unfortunately does not (yet?) offer
 a "Dismiss All" button. That's where this script comes
 in handy!
+---
 
-### What it does
+## What it does
 The script will first ask for the name of your
 Jamf Cloud hosted instance of Jamf Pro.
 Only the name is required. You can leave out
