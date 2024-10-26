@@ -7,7 +7,7 @@ deserved holidays or another leave of absence.
 Jamf Pro's Web UI unfortunately does not (yet?) offer
 a "Dismiss All" button. That's where this script comes
 in handy!
----
+
 
 ## What it does
 The script will first ask for the name of your
