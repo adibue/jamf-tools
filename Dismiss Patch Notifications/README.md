@@ -28,5 +28,5 @@ this step might take a minute or so to finish,
 if you have hundreds of notifications.
 
 ## Wanna-do's
-- Add a Shortcuts workflow based on [Jamf Actions](https://github.com/Jamf-Concepts/actions)
-- Program a Swift app
+- [ ] Add a Shortcuts workflow based on [Jamf Actions](https://github.com/Jamf-Concepts/actions)
+- [ ] Program a Swift app
