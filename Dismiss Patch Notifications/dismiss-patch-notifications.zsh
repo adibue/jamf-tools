@@ -1,8 +1,9 @@
-#!/bin/zsh
+#!/bin/zsh --no-rcs
 
 # Basics
 clear
 declare -i CURRENT=0
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin # Use only SIP protected bins
 
 # Get JSS URL from plist
 JSS_URL=$(plutil -extract jss_url raw "/Library/Preferences/com.jamfsoftware.jamf.plist")
@@ -18,6 +19,8 @@ function print_header() {
     echo "  This script will help you to dismiss"
     echo "  patch notifications in your Jamf Pro"
     echo "  instance."
+    echo
+    echo "  Check out \e[4madibue.dev/jamf\e[0m for more."
     echo
     echo "  Press any key to continue..."
     echo "-----------------------------------------"
@@ -123,8 +126,8 @@ function invalidate_token() {
 
 # Progress bar
 progress_bar() {
-    local progress=$1
-    local total=$2
+    local progress=$CURRENT
+    local total=$NOTIF_COUNT
     local width=50
 
     # Calculate percentage
@@ -221,7 +224,7 @@ else
                 echo -e "\n❌ Failed to dismiss notification ID $ID. HTTP response code: $RESPONSE_CODE"
             fi
 
-            progress_bar "$CURRENT" "$NOTIF_COUNT"
+            progress_bar
         done
 
         echo
