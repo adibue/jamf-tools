@@ -25,7 +25,7 @@ function print_header() {
     echo "  Press any key to continue..."
     echo "-----------------------------------------"
     echo
-    read -n 1
+    read -n 1 < /dev/tty
     clear
 }
 
@@ -34,14 +34,14 @@ function validate_url() {
     echo "I found this Jamf Pro URL: \e[1m\e[4m$JSS_URL\e[0m"
     echo
     printf "Is this correct? [Y/n]: "
-    read -r response
+    read -r response < /dev/tty
     # Loop until user answers "y", "n", or presses enter
     until [[ "$response" =~ ^[YyNn]$ || -z "$response" ]]; do
         echo
         echo "I didn't get that."
         echo "Jamf Pro URL is set to: \e[1m\e[4m$JSS_URL\e[0m"
         printf "Is this correct? [Y/n]: "
-        read -r response
+        read -r response < /dev/tty
     done
     # If the answer is no, invoke instance_prompt
     if [[ "$response" =~ ^[Nn]$ ]]; then
@@ -56,7 +56,7 @@ function instance_prompt() {
     echo
     echo "Please enter your Jamf Pro instance name (without "https://" and "jamfcloud.com")."
     echo "Example: If your Jamf Pro URL is https://myinstance.jamfcloud.com, enter 'myinstance.'"
-    read "JSS_INSTANCE?Instance name: "
+    read "JSS_INSTANCE?Instance name: " < /dev/tty
     echo
     JSS_URL="https://$JSS_INSTANCE.jamfcloud.com/"
     # Validate input
@@ -65,7 +65,7 @@ function instance_prompt() {
         echo "Got \e[1m\e[4m$JSS_URL\e[0m"
         echo "That doesn't look right... Let's try again."
         echo "Please enter \e[1mONLY\e[0m your Jamf Pro instance name (without "https://" and "jamfcloud.com")."
-        read "JSS_INSTANCE?Instance name: "
+        read "JSS_INSTANCE?Instance name: " < /dev/tty
         JSS_URL="https://$JSS_INSTANCE.jamfcloud.com/"
         echo
     done
@@ -80,19 +80,19 @@ function credentials_prompt() {
     echo "Please enter your Jamf Pro credentials."
     echo "Don't worry, we're not storing them anywhere."
     echo
-    read "username?Please enter your username: "
+    read "username?Please enter your username: " < /dev/tty
     # Check if username is empty
     until [[ -n "$username" ]]; do
         echo
         echo "\e[31mUsername can't be empty.\e[0m Please try again."
-        read "username?Please enter your username: "
+        read "username?Please enter your username: " < /dev/tty
     done
-    read -s "password?Please enter your password: "
+    read -s "password?Please enter your password: " < /dev/tty
     # Check if password is empty
     until [[ -n "$password" ]]; do
         echo
         echo "\e[31mPassword can't be empty.\e[0m Please try again."
-        read -s "password?Please enter your password: "
+        read -s "password?Please enter your password: " < /dev/tty
     done
     echo
 }
@@ -193,13 +193,13 @@ else
     echo "I found $NOTIF_COUNT patch notification(s) of the type 'PATCH_UPDATE'."
     printf "Want to dismiss 'em all? [y/N]: "
     # Loop until user answers "y", "n", or presses enter
-    read -r response
+    read -r response < /dev/tty
 
     until [[ "$response" =~ ^[YyNn]$ || -z "$response" ]]; do
         echo
         echo "I didn't get that."
         printf "Do you want to dismiss all $NOTIF_COUNT patch notification(s)? [y/N]: "
-        read -r response
+        read -r response < /dev/tty
     done
 
     if [[ "$response" =~ ^[Yy]$ ]]; then
