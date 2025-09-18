@@ -16,7 +16,7 @@ It's very straight forward. The Script will guide you through the process.
 Just download `dismiss-patch-notifications.zsh`and run it with
 `zsh ./dismiss-patch-notifications.zsh` or use the following command in a Terminal to run it:
 
-`curl -fsSL "https://adibue.dev/jp-notif" | sudo zsh`
+`curl -fsSL "https://adibue.dev/jp-notif" | zsh`
 
 Happy cleaning! 😁
 
