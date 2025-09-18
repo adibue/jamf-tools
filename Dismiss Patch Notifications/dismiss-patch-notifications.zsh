@@ -112,6 +112,15 @@ function generate_token() {
     fi
 }
 
+# Invalidate token
+function invalidate_token() {
+    curl --request POST \
+    --silent \
+    --url "$JSS_URL/api/v1/auth/invalidate-token" \
+    --header 'accept: application/json' \
+    --header "authorization: Bearer $TOKEN"
+}
+
 # Progress bar
 progress_bar() {
     local progress=$1
@@ -172,8 +181,10 @@ NOTIF=$(curl --request GET \
 declare -i NOTIF_COUNT=$(echo "$NOTIF" | jq '.[].type' | grep -o PATCH_UPDATE | wc -l )
 
 if [[ "$NOTIF_COUNT" -eq 0 ]]; then
-    echo "\e[42mCongratulations! There are no patch notifications to dismiss.\e[0m"
+    echo "\e[32mCongratulations! There are no patch notifications to dismiss.\e[0m"
     echo "We're all done here."
+    invalidate_token
+    sleep 1
     exit 0
 else
     echo "I found $NOTIF_COUNT patch notification(s) of the type 'PATCH_UPDATE'."
@@ -216,6 +227,7 @@ else
         echo
         echo "\e[42mCleanup complete!\e[0m"
         echo "Time to say goodbye..."
+        invalidate_token
         sleep 1
         exit 0
 
@@ -224,6 +236,7 @@ else
         echo
         echo "You chose to hoard your notifications."
         echo "Time to say goodbye, then..."
+        invalidate_token
         sleep 1
         exit 0
     fi
